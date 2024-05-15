@@ -9,4 +9,8 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
     db.init_app(app)
     
+    from src.routers import routers
+    
+    app.register_blueprint(routers)
+    
     return app
