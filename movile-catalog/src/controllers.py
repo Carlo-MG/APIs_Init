@@ -1,3 +1,4 @@
+from flask import jsonify
 from src.models import Movile
 from src import db
 
@@ -13,4 +14,10 @@ def add_movile(data):
     db.session.commit()
     
     return {'message': 'OK'}
+
+
+def list_Movile():
+    data = Movile.query.all()
+    
+    return [item.to_dict() for item in data]
 

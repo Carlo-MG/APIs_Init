@@ -7,3 +7,6 @@ class Movile (db.Model):
     
     def __repr__(self):
         return f'< Movile {self.name} >'
+
+    def to_dict(self):
+        return {'id_movile':self.id_movile, 'name':self.name, 'description': self.description}
