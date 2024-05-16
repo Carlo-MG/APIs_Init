@@ -34,5 +34,5 @@ def login_by_username(data):
     user = User.query.filter_by(username=username).filter_by(password=password).all()
     if not user: return {'message': 'Contraseña incorrecta'}
     
-    return {'message': 'OK'}
+    return {'message': 'OK', 'token': 'hola'}
     

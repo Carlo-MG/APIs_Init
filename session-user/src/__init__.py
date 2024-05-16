@@ -9,8 +9,8 @@ def create_app(config_class=Config):
     app.config.from_object(config_class)
     db.init_app(app)
     
-    from src.routers import endpointers
+    from src.routers import endpoints
     
-    app.register_blueprint(endpointers)
+    app.register_blueprint(endpoints)
     
     return app
