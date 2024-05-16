@@ -1,4 +1,4 @@
-from src.controller import create_user
+from src.controller import create_user, login_by_username
 from flask import Blueprint, request, jsonify
 
 endpointers = Blueprint('routers', __name__)
@@ -10,5 +10,14 @@ def register():
     
     if res['message'] == 'OK':
         return jsonify(res), 201
+    return jsonify(res), 409
+
+@endpointers.route('/login/username', methods=['POST'])
+def loginByUsername():
+    data = request.get_json()
+    
+    res = login_by_username(data)
+    
+    if res['message'] == 'OK': return jsonify(res), 200
     return jsonify(res), 409
 

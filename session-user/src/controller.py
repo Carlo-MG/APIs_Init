@@ -23,6 +23,16 @@ def create_user(data):
     db.session.commit()
     
     return {'message':'OK'}
+
+def login_by_username(data):
+    username = data.get('username')
+    password = data.get('password')
     
+    user = User.query.filter_by(username=username).all()
+    if not user: return {'message': 'usuario sin registrar'}
     
+    user = User.query.filter_by(username=username).filter_by(password=password).all()
+    if not user: return {'message': 'Contraseña incorrecta'}
+    
+    return {'message': 'OK'}
     
