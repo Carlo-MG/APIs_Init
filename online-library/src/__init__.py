@@ -9,6 +9,8 @@ def create_app():
     app.config['SECRET_KEY'] = '1234567891'
     app.config['JWT_SECRET_KEY'] = '1234567891'
     
+    from src.routers import BP_user
+    app.register_blueprint(BP_user)
     db.init_app(app)
     
     
