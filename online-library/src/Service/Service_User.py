@@ -14,4 +14,17 @@ def Create_user(data):
     db.session.commit()
     return {'message': 'OK'}
 
+def Login_user(data):
+    username = data.get('username')
+    password = data.get('password')
+    
+    user = User.query.filter_by(username=username).first()
+    if not user : return {'message': 'nombre de usuario no valido'}
+    
+    user = User.query.filter_by(username=username, password=password)
+    if not user : return {'message': 'Contraseña incorrecta'}
+    
+    return {'message': 'OK'}
+    
+
 
