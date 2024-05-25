@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
-from src.Service.Service_User import Create_user
+from src.Service.Service_User import Create_user, Login_user
+from src.Auth.create_token import create_token
 
 BP_user = Blueprint('user', __name__)
 
@@ -13,5 +14,17 @@ def user_register():
     
     if res['message'] == 'OK' : return jsonify(res), 201
     return jsonify(res), 409
+
+@BP_user.route('/user/login', methods=['POST'])
+def login_user():
+    if not request.is_json : {'message': 'formatodo no valido'}
+    data = request.get_json()
+    
+    res = Login_user(data)
+    
+    if not res['message'] == 'OK': return jsonify(res), 409
+    
+    return create_token(data.get('username'))
+    
     
 
