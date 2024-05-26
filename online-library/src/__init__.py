@@ -12,8 +12,9 @@ def create_app():
     
     jwt = JWTManager(app)
     
-    from src.routers import BP_user
+    from src.routers import BP_user, BP_Author
     app.register_blueprint(BP_user)
+    app.register_blueprint(BP_Author)
     db.init_app(app)
     
     
