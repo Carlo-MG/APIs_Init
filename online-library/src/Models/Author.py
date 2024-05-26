@@ -7,5 +7,8 @@ class Author(db.Model):
     books = db.relationship('Book', backref='author', lazy=True)
     
     def __repr__(self):
-        return f'<Author {self.name}>'    
+        return f'<Author {self.name}>'
+    
+    def get_obj(self):
+        return {'id': self.id, 'name':self.name, 'books':self.books}    
     
