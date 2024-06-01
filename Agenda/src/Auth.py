@@ -10,6 +10,7 @@ bcrypt = Bcrypt()
 @auth.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
+    print(data['password'])
     hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
     new_user = User(username=data['username'], email=data['email'], password=hashed_password)
     db.session.add(new_user)
@@ -20,6 +21,9 @@ def register():
 def login():
     data = request.get_json()
     user = User.query.filter_by(email=data['email']).first()
+    print(user)
+    print(data['password'])
+    print(bcrypt.check_password_hash(user.password, data['password']))
     if user and bcrypt.check_password_hash(user.password, data['password']):
         access_token = create_access_token(identity=user.id)
         return jsonify(access_token=access_token), 200
